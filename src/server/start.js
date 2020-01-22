@@ -1,3 +1,4 @@
+require('dotenv').config()
 import { ApolloServer } from 'apollo-server-express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
@@ -6,9 +7,12 @@ import express from 'express'
 import resolvers from '#root/graphql/resolvers'
 import typeDefs from '#root/graphql/typeDefs'
 
-const PORT = process.env.PORT || 7000
+import formatGraphQLErrors from './formatGraphQLErrors'
+
+const PORT = process.env.PORT
 
 const apolloServer = new ApolloServer({
+  formatError: formatGraphQLErrors,
   resolvers,
   typeDefs
 })
