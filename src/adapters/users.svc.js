@@ -1,6 +1,6 @@
 import got from 'got'
 
-const USERS_SVC_URL = process.env.USERS_SVC_URL || "http://users-svc:7101"
+const USERS_SVC_URL = process.env.USERS_SVC_URL || 'http://users-svc:7101'
 
 export default class UsersSvcAdapter {
   static async createUser({ email, password }) {
@@ -12,6 +12,21 @@ export default class UsersSvcAdapter {
           }
         }
       ).json()
+      return body;
+    } catch (e) {
+      return `error: ${e}`
+    }
+  }
+
+  static async createUserSession({ email, password }) {
+    try {
+      const body = await got.post(
+        `${USERS_SVC_URL}/sessions`, {
+          json: {
+            email, password
+          }
+        }
+      ).json();
       return body;
     } catch (e) {
       return `error: ${e}`

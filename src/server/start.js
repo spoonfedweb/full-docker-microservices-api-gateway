@@ -12,6 +12,7 @@ import formatGraphQLErrors from './formatGraphQLErrors'
 const PORT = process.env.PORT
 
 const apolloServer = new ApolloServer({
+  context: a => a,
   formatError: formatGraphQLErrors,
   resolvers,
   typeDefs
