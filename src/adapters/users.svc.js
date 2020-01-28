@@ -32,4 +32,26 @@ export default class UsersSvcAdapter {
       return `error: ${e}`
     }
   }
+
+  static async fetchUser({ userId }) {
+    try {
+      const body = await got.get(
+        `${USERS_SVC_URL}/users/${userId}`
+      ).json();
+      return body;
+    } catch (e) {
+      return `error: ${e}`
+    }
+  }
+
+  static async fetchUserSession({ sessionId }) {
+    try {
+      const body = await got.get(
+        `${USERS_SVC_URL}/sessions/${sessionId}`
+      ).json()
+      return body
+    } catch (e) {
+      return `error: ${e}`
+    }
+  }
 }
