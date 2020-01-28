@@ -8,10 +8,12 @@ import resolvers from '#root/graphql/resolvers'
 import typeDefs from '#root/graphql/typeDefs'
 
 import formatGraphQLErrors from './formatGraphQLErrors'
+import injectSession from './injectSession'
 
 const PORT = process.env.PORT
 
 const apolloServer = new ApolloServer({
+  context: a => a,
   formatError: formatGraphQLErrors,
   resolvers,
   typeDefs
@@ -25,6 +27,8 @@ app.use(cors({
   origin: (origin, cb) => cb(null, true),
   credentials: true
 }))
+
+app.use(injectSession)
 
 apolloServer.applyMiddleware({ app, cors: false, path: '/graphql'})
 
