@@ -26,11 +26,16 @@ const typeDefs = gql`
     createUserSession(email: String!, password: String!): UserSession!
     deleteUserSession(sessionId: ID!): Boolean!
     createListing(description: String!, title: String!): Listing!
+    deleteListing(listingId: ID!): ServerMessage
   }
 
   type Query {
     listings: [Listing!]!
     userSession(me: Boolean!): UserSession
+  }
+
+  type ServerMessage {
+    message: String
   }
 `
 

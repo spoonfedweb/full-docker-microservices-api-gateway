@@ -33,4 +33,15 @@ export default class ListingsSvcAdapter {
       return `error: ${e}`
     }
   }
+
+  static async deleteListing({ listingId }) {
+    try {
+      const body = await got
+        .delete(`${LISTINGS_SVC_URL}/listings/${listingId}`)
+        .json()
+      return body
+    } catch (e) {
+      return `${e}`
+    }
+  }
 }
